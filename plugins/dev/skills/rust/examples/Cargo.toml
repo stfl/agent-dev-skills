@@ -1,0 +1,13 @@
+[package]
+name = "rust-skill-examples"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+tokio = { version = "1", features = ["full", "test-util"] }
+tokio-util = { version = "0.7", features = ["rt"] }
+thiserror = "2"
+futures = "0.3"
+trait-variant = "0.1"
+metrics = "0.24"

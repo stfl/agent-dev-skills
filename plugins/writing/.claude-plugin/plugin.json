@@ -1,0 +1,10 @@
+{
+  "name": "writing",
+  "version": "0.1.0",
+  "description": "Documentation skills and the documentation style rule, loaded into every session.",
+  "author": {
+    "name": "Stefan Lendl",
+    "email": "s@stfl.dev"
+  },
+  "repository": "https://github.com/stfl/agent-skills"
+}

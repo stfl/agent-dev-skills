@@ -1,0 +1,10 @@
+{
+  "name": "dev",
+  "version": "0.1.0",
+  "description": "Engineering skills: language-agnostic clean-code discipline and Rust design.",
+  "author": {
+    "name": "Stefan Lendl",
+    "email": "s@stfl.dev"
+  },
+  "repository": "https://github.com/stfl/agent-skills"
+}
