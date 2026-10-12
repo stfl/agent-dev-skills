@@ -1,0 +1,2 @@
+# Branch protection on main requires a code-owner review, so only Stefan's approval lands a pull request.
+* @stfl
