@@ -1,0 +1,20 @@
+{
+  "name": "stfl-agent-dev-skills",
+  "description": "Engineering and documentation skills and rules shared between Stefan Lendl's Claude Code sessions, his Paperclip agents and teammates.",
+  "owner": {
+    "name": "Stefan Lendl",
+    "email": "s@stfl.dev"
+  },
+  "plugins": [
+    {
+      "name": "dev",
+      "source": "./plugins/dev",
+      "description": "Engineering skills: language-agnostic clean-code discipline and Rust design."
+    },
+    {
+      "name": "writing",
+      "source": "./plugins/writing",
+      "description": "Documentation skills and the documentation style rule, loaded into every session."
+    }
+  ]
+}
