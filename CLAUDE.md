@@ -17,6 +17,9 @@ A Claude Code plugin marketplace. `README.md` is the human primer.
 - `plugins/writing/rules/*.md` are always-on rules. Plugins have no rules
   component, so `plugins/writing/hooks/rules.sh` prints every file there at
   session start. A plugin that needs its own rules copies that hook.
+- `plugins/dev/hooks/rust-skill-gate.sh` is a PreToolUse hook that denies an
+  edit to a `.rs` file until the session transcript shows the `rust` skill
+  loaded, so the skill is in context before any Rust changes.
 
 ## Who consumes this
 
