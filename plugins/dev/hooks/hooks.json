@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Edit(//**/*.rs)",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/rust-skill-gate.sh\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "if": "Write(//**/*.rs)",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/rust-skill-gate.sh\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "if": "MultiEdit(//**/*.rs)",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/rust-skill-gate.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
