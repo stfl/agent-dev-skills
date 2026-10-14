@@ -40,6 +40,6 @@ A Claude Code plugin marketplace. `README.md` is the human primer.
   is a way around every sandbox those sessions run.
 - Before opening a pull request, run what CI runs:
   `claude plugin validate --strict .`, the same for each plugin directory, and
-  `npm install --no-save js-yaml && node scripts/check-skill-frontmatter.mjs`.
+  `npm install --no-save js-yaml@4.1.0 && node scripts/check-skill-frontmatter.mjs`.
   `claude plugin validate` reads the manifests only, so the frontmatter check
   is the one that catches a `SKILL.md` whose YAML does not parse.

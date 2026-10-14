@@ -22,5 +22,5 @@ jobs:
           done
       - name: Check every skill's frontmatter
         run: |
-          npm install --no-save js-yaml
+          npm install --no-save js-yaml@4.1.0
           node scripts/check-skill-frontmatter.mjs
