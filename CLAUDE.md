@@ -13,7 +13,9 @@ A Claude Code plugin marketplace. `README.md` is the human primer.
 - `plugins/<plugin>/skills/<name>/SKILL.md` is a skill. Keep the Agent Skills
   format, frontmatter `name` and `description`, so other agents read the same
   files. The description is what decides when a skill loads; put its triggers
-  there.
+  there. Quote the description whenever it holds a `: `, a `#` or a leading
+  `[`, `{`, `*`, `&` or `!`: unquoted, YAML reads those as syntax and the
+  frontmatter stops parsing.
 - `plugins/writing/rules/*.md` are always-on rules. Plugins have no rules
   component, so `plugins/writing/hooks/rules.sh` prints every file there at
   session start. A plugin that needs its own rules copies that hook.
@@ -37,4 +39,7 @@ A Claude Code plugin marketplace. `README.md` is the human primer.
   are instructions that sessions with root access follow; an unreviewed skill
   is a way around every sandbox those sessions run.
 - Before opening a pull request, run what CI runs:
-  `claude plugin validate --strict .` and the same for each plugin directory.
+  `claude plugin validate --strict .`, the same for each plugin directory, and
+  `npm install --no-save js-yaml@4.1.0 && node scripts/check-skill-frontmatter.mjs`.
+  `claude plugin validate` reads the manifests only, so the frontmatter check
+  is the one that catches a `SKILL.md` whose YAML does not parse.

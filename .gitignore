@@ -1,0 +1,2 @@
+# The frontmatter check installs js-yaml with `--no-save` into the repo root.
+node_modules/
