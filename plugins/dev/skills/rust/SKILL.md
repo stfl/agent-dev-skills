@@ -1,6 +1,6 @@
 ---
 name: rust
-description: Design Rust so the compiler enforces the design and hands you the worklist. Use when writing or refactoring Rust — a crate or module, a type, trait, enum or public API, error handling, tokio tasks and channels, FFI over a C library, state persisted to a file, a background thread's lifecycle, or a crate's lints, tests and mutation gate. Also use for a review of existing Rust, or when a borrow-checker or trait-bound error wants a design fix rather than a `.clone()`.
+description: Design Rust so the compiler enforces the design and hands you the worklist. Use when writing or refactoring Rust — a crate or module, a type, trait, enum or public API, error handling, tokio tasks and channels, FFI over a C library, state persisted to a file, a background thread's lifecycle, or a crate's lints, tests and mutation gate. Use before editing any `.rs` file or a `Cargo.toml`. Also use for a review of existing Rust, or when a borrow-checker or trait-bound error wants a design fix rather than a `.clone()`.
 ---
 
 # Rust
