@@ -20,3 +20,7 @@ jobs:
           for plugin in plugins/*/; do
             claude plugin validate --strict "$plugin"
           done
+      - name: Check every skill's frontmatter
+        run: |
+          npm install --no-save js-yaml
+          node scripts/check-skill-frontmatter.mjs
