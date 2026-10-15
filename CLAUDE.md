@@ -15,7 +15,10 @@ A Claude Code plugin marketplace. `README.md` is the human primer.
   files. The description is what decides when a skill loads; put its triggers
   there. Quote the description whenever it holds a `: `, a `#` or a leading
   `[`, `{`, `*`, `&` or `!`: unquoted, YAML reads those as syntax and the
-  frontmatter stops parsing.
+  frontmatter stops parsing. The `name` is lowercase letters, digits and
+  single inner hyphens, and it must equal its own directory: a `name` that
+  drifts from its directory breaks the key agents register the skill under.
+  Both fields have a length cap, which the frontmatter check below measures.
 - `plugins/writing/rules/*.md` are always-on rules. Plugins have no rules
   component, so `plugins/writing/hooks/rules.sh` prints every file there at
   session start. A plugin that needs its own rules copies that hook.
@@ -42,4 +45,6 @@ A Claude Code plugin marketplace. `README.md` is the human primer.
   `claude plugin validate --strict .`, the same for each plugin directory, and
   `npm install --no-save js-yaml@4.1.0 && node scripts/check-skill-frontmatter.mjs`.
   `claude plugin validate` reads the manifests only, so the frontmatter check
-  is the one that catches a `SKILL.md` whose YAML does not parse.
+  is the one that catches a `SKILL.md` whose YAML does not parse, whose
+  description or `name` runs past its length cap, or whose `name` breaks its
+  format or disagrees with its directory.
