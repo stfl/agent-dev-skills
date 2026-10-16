@@ -1,7 +1,7 @@
 {
   "name": "dev",
-  "version": "0.2.0",
-  "description": "Engineering skills: language-agnostic clean-code discipline and Rust design.",
+  "version": "0.3.0",
+  "description": "Engineering skills: language-agnostic clean-code discipline, Rust design, and graph-backed review with the code-review-graph CLI.",
   "author": {
     "name": "Stefan Lendl",
     "email": "s@stfl.dev"

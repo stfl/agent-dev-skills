@@ -7,7 +7,7 @@ Paperclip read the same files.
 
 | Plugin | Contents |
 |--------|----------|
-| `dev` | Engineering skills: clean code, Rust. A hook refuses edits to `.rs` files until the session has loaded the Rust skill |
+| `dev` | Engineering skills: clean code, Rust, graph-backed review. A hook refuses edits to `.rs` files until the session has loaded the Rust skill |
 | `writing` | Documentation skills, and the documentation style rule loaded into every session |
 
 ## Install
