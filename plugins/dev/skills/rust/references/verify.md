@@ -31,6 +31,7 @@ allow_attributes_without_reason = "warn"
 undocumented_unsafe_blocks = "warn"           # meaningful only with `deny` above, not `forbid`
 await_holding_lock = "deny"                   # warn by default; deny is the point, tokio crates only
 cognitive_complexity = "warn"                 # restriction; its threshold lives in clippy.toml below
+self_named_module_files = "warn"              # one layout: a topic's entry point is x/mod.rs, inside its directory (boundaries.md)
 ```
 
 Everything in that block is either `restriction` (off by default, enabled one lint at a time) or a deliberate level change on a lint that already warns.

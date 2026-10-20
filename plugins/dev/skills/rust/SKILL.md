@@ -69,7 +69,7 @@ Read the file before writing the code, not after the review. A small change insi
 | writing a **proc macro or derive** whose output compiles in someone else's crate | `references/boundaries.md` § Generated code |
 | writing a value whose methods must be called in an order | as above |
 | running a background `std::thread` that must be signalled and joined on drop | as above |
-| designing a trait, a public API, an iterator, or crate layout | `references/boundaries.md` — earn the trait, std traits first, signatures, crate split |
+| designing a trait, a public API, an iterator, or a crate, module or directory layout | `references/boundaries.md` — earn the trait, std traits first, signatures, crate split, a topic's directory |
 | writing a decision function whose return the shell must *interpret* — a `ServeMissed` that leaves the shell deriving *which* | `references/boundaries.md` § What a decision hands back |
 | building an interpreter, VM, query executor, or a pipeline over a fixed set of node kinds | `references/boundaries.md` § When you do write one |
 | choosing error types, propagation, or whether to panic | `references/errors.md` — variants as decisions, classifiers, panic policy, reporting once |
