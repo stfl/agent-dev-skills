@@ -1,6 +1,6 @@
 ---
 name: clean-code
-description: Language-agnostic design and cleanup discipline — state lives in the type, decompose by decision into pure single-purpose functions, deep modules over tidy fragments, and a second pass that leaves touched code cleaner without mixing structure and behaviour changes. Use when writing or refactoring code in any language, when a function grows conditionals over several fields, when asked to clean up, tidy, simplify, reduce technical debt, or leave code cleaner, and as the base every language skill (such as `rust`) inherits.
+description: Language-agnostic design and cleanup discipline — state lives in the type, decompose by decision into pure single-purpose functions, deep modules over tidy fragments, and a second pass that leaves touched code cleaner without mixing structure and behaviour changes. Use when writing or refactoring code in any language, when deciding where a file or a directory goes, when a function grows conditionals over several fields, when asked to clean up, tidy, simplify, reduce technical debt, or leave code cleaner, and as the base every language skill (such as `rust`) inherits.
 ---
 
 # Clean code
@@ -18,6 +18,10 @@ Complexity is incremental. No single change makes a codebase spaghetti; a hundre
 ## Deep, then tidy
 
 Two scales, one budget. Depth is measured at the interface: how much behaviour a caller gets per fact they must learn (`codebase-design` owns that vocabulary). Tidiness is measured inside the body: small functions, guard clauses, one idea per block. A deep module is usually built from many tidy private functions, and those cost the caller nothing. The failure is promoting tidy fragments to the interface: every public function is one more fact to learn, and a five-line function with five parameters is shallower than the twenty lines it replaced. Split when the piece is separable, which is to say a decision; keep together what shares state and is only ever read together. Beck's *one pile* is the sanctioned reverse move: inline scattered fragments, then re-split along the better seam.
+
+## The tree is the table of contents
+
+A directory holds one topic: a thing a reader looks for by name, whose files change together for one reason. Name it with the domain's noun for that topic, never with a kind of code: `utils/`, `types/`, `traits/`, `helpers/` and `common/` gather files that change for unrelated reasons and scatter every topic across them. Read from the top, the tree then lists what the program does, with the frame every topic uses — the entry point, configuration, logging — flat beside the topics. The test is deletion: dropping a feature drops one directory. A topic with one file stays a file, a directory holds another only when the inner group passes the same test, and a group usable on its own is a package of its own. It is *cohesion order* one level up; the language skill says what else a directory enforces. Why: a reader finds code by the name of what it does, and a change that stays inside one directory is reviewed whole.
 
 ## The second pass
 
