@@ -36,4 +36,6 @@ Do not also install that plugin from the marketplace: it would load twice.
 
 ## Contributing
 
-`main` changes through pull requests. Open one from your clone or a fork.
+`main` takes direct pushes from my own sessions and from the daily review,
+which lands my Paperclip agents' reports in its own words; the agents file
+reports as issues and open no pull request. Open a pull request from a fork.

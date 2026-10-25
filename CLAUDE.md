@@ -32,16 +32,23 @@ A Claude Code plugin marketplace. `README.md` is the human primer.
 - An editor links a plugin directory of their own clone into
   `~/.claude/skills/` and edits there.
 - Stefan's Paperclip agents take the `dev` skills from here as Paperclip
-  company skills. Stefan reviews any change they propose before it reaches
-  `main`.
+  company skills. A change they propose reaches `main` only as a report the
+  daily review lands or escalates to Stefan.
 
 ## Workflow
 
-- `main` changes only through pull requests.
-- A change written by an agent waits for a human review, always. These files
-  are instructions that sessions with root access follow; an unreviewed skill
-  is a way around every sandbox those sessions run.
-- Before opening a pull request, run what CI runs:
+- `main` takes direct pushes from Stefan's own sessions and from the daily
+  review, `stfl-daily-review[bot]`, which lands a passing report from one of
+  his Paperclip agents in its own words; a new, moved or deleted skill lands
+  only on Stefan's word. Teammates open pull requests from a fork.
+- His agents never push or open a pull request here: each files a report,
+  an issue, which is public as soon as it is filed. The agent-skills
+  reviewer grades it before the daily review reads it.
+- These files are instructions that sessions with root access follow, so a
+  teammate's pull request waits for a human review, always, and a report
+  passes the reviewer and the daily review, whose escalation list sends
+  anything that runs, configures or widens access to Stefan.
+- Before a push or a pull request, run what CI runs:
   `claude plugin validate --strict .`, the same for each plugin directory, and
   `npm install --no-save js-yaml@4.1.0 && node scripts/check-skill-frontmatter.mjs`.
   `claude plugin validate` reads the manifests only, so the frontmatter check
