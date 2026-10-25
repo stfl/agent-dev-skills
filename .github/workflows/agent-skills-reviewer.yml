@@ -1,0 +1,18 @@
+name: agent-skills reviewer
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions: {}
+
+jobs:
+  review:
+    if: github.event.issue.user.login == 'stfl-agent-stf[bot]' || github.event.issue.user.login == 'stfl-agent-sev[bot]'
+    permissions:
+      issues: write
+      contents: read
+    # Moves only in stfl/agent-skills-reviewer's ship order (its CLAUDE.md).
+    uses: stfl/agent-skills-reviewer/.github/workflows/review.yml@3ca1bd528d0c984495cab1afdb4f017201c2d59d
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.REVIEWER_ANTHROPIC_API_KEY }}
