@@ -21,7 +21,7 @@ Two scales, one budget. Depth is measured at the interface: how much behaviour a
 
 ## The tree is the table of contents
 
-A directory holds one topic, named with the domain's noun (`billing/`, not `types/`): the files a reader looks for under that name, which change together for one reason. The frame every topic uses (the program's entry point, configuration, logging) stays flat at the root. The test is deletion: dropping a feature drops one directory. A one-file topic stays a file, a directory nests another only when the inner group passes the same test, and a group usable on its own becomes a package. It is *cohesion order* one level up. Why: a reader finds code by the name of what it does, and a change that stays inside one directory is reviewed whole.
+A directory holds one topic, named with the domain's noun (`billing/`, not `types/`): the files a reader looks for under that name, which change together for one reason. The frame every topic uses (the program's entry point, configuration, logging) stays flat at the root. A layout the framework fixes, such as Rails's `app/models/` or Django's `migrations/`, is frame too: the framework finds the files by it. The test is deletion: dropping a feature drops one directory. A one-file topic stays a file, a directory nests another only when the inner group passes the same test, and a group usable on its own becomes a package. It is *cohesion order* one level up. Why: a reader finds code by the name of what it does, and a change that stays inside one directory is reviewed whole.
 
 ## Reconcile against what you can read back
 
