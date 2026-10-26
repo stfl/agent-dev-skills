@@ -18,6 +18,8 @@ The second pass's worklist. Names follow Fowler's *Refactoring* and Beck's *Tidy
 | **Speculative generality** | one implementor; a generic with one instantiation; an unused parameter | Inline; Remove Dead Code | the concrete thing |
 | **Divergent change** | one module edited for unrelated reasons | Extract Module; Move Function | a module owns one invariant |
 | **Shotgun surgery** | one reason touches many modules | Move Function; Inline Module | the knowledge in one place |
+| **Directory by kind** | a directory named for what its files are: `utils/`, `types/`, `traits/`, `helpers/`, `common/`, `models/` | Move each file to the topic it changes with (package by feature) | one directory per topic, named with the domain's noun |
+| **Scattered topic** | one topic's files flat among unrelated ones: siblings sharing a name prefix or a glossary noun, or changed together by one feature | Cohesion Order, at the file level | the topic's files in one directory |
 | **Feature envy, message chains** | a function reading another type's fields more than its own; `a.b().c().d()` | Move Function; Hide Delegate | the behaviour lives with the data |
 | **Mutable shared state** | a value mutated from several places | own it in one place; pass values; return new values | one owner; a channel or a return value instead of shared mutation |
 | **Loop doing two things** | an accumulator plus a side effect in one loop | Split Loop; Replace Loop with Pipeline | one iterator chain per concern |
