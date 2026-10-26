@@ -19,6 +19,10 @@ Complexity is incremental. No single change makes a codebase spaghetti; a hundre
 
 Two scales, one budget. Depth is measured at the interface: how much behaviour a caller gets per fact they must learn (`codebase-design` owns that vocabulary). Tidiness is measured inside the body: small functions, guard clauses, one idea per block. A deep module is usually built from many tidy private functions, and those cost the caller nothing. The failure is promoting tidy fragments to the interface: every public function is one more fact to learn, and a five-line function with five parameters is shallower than the twenty lines it replaced. Split when the piece is separable, which is to say a decision; keep together what shares state and is only ever read together. Beck's *one pile* is the sanctioned reverse move: inline scattered fragments, then re-split along the better seam.
 
+## A test that tells right from wrong
+
+A test covers each wrong form of the property it names. That one failing item takes nothing from the items around it can fail two ways, stopping at the failure or discarding what came before it, so its test puts the failing item between two that succeed and asserts the results of both; a failure at either end of the sequence shows one wrong form only. A test of a rule over several kinds of input gives one input of each kind. Before you rely on such a test, run it once against each wrong form and watch it fail. Why: a test that sees one wrong form passes code that is wrong in the other.
+
 ## The second pass
 
 Runs after the behaviour change is green, in a fresh context — a reviewer or a new agent — because the writer stops at green and inherits every "good enough" it told itself. Scope is the diff plus one hop: the callers and callees of every changed function, and every type that gained a field or variant. Nothing outside the scope moves.
