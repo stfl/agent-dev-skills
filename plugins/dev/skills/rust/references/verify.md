@@ -150,3 +150,5 @@ cargo fmt --all --check \
 When the crate has features, run clippy **twice** — default and `--no-default-features` — and give an integration test that needs a feature a `[[test]] required-features` entry. A `no_std` claim checked only with `cargo check` on the lib target is a claim about one target out of four.
 
 `--workspace` everywhere is load-bearing: when the workspace root is itself a package, `default-members` is just the root, so a bare `cargo test` compiles none of your members and still exits 0. Keep the `--doc` half too — `nextest` skips doctests, and dropping it silently deletes every `compile_fail` guarantee.
+
+**Worktrees that share one target directory can run a stale binary.** The output's file names do not depend on the worktree's path, and cargo judges a local crate fresh by modification time, so a build in a worktree whose sources are older than the last binary reuses that binary. Give each worktree its own target directory, or `touch` its sources before the build, and check the test count against a number you can derive. Why: a stale binary lists or passes the tests of another commit, and its output does not say so.
