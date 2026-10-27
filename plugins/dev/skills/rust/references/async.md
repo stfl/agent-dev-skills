@@ -1,6 +1,6 @@
 # Async: tasks, channels, shutdown
 
-With no background task and no channel, only the *Blocking* section below applies — an HTTP handler or a UI loop that merely awaits is not the subject of this file. Async buys concurrency for IO-bound work and nothing else. Keep the decisions sync (see *core and shell* in `SKILL.md`) so this layer stays thin enough to reason about.
+With no background task and no channel, only the *Blocking* section below applies — an HTTP handler or a UI loop that merely awaits is not the subject of this file. Async buys concurrency for IO-bound work and nothing else. Keep the decisions sync (see *core and shell* in `SKILL.md`) so this layer stays thin enough to reason about. The facts here hold for tokio 1.53, tokio-util 0.7.19 and reqwest 0.13; `JoinSet` needs tokio 1.21 or later, `TaskTracker` tokio-util 0.7.10, and `async fn` in a trait Rust 1.75.
 
 ## A task owns state; a channel is the way in
 

@@ -1,6 +1,6 @@
 ---
 name: rust
-description: "Design Rust so the compiler enforces the design and hands you the worklist. Load on the first sign the work is Rust, before the first edit: a `Cargo.toml` or `Cargo.lock` in the tree, a `*.rs` file in the diff or about to be written, a `cargo build`, `cargo check`, `cargo test`, `cargo clippy` or `cargo fmt` command, a Rust crate or workspace member by name. Use when writing or refactoring Rust — a crate or module, a type, trait, enum or public API, error handling, tokio tasks and channels, FFI over a C library, state persisted to a file, a background thread's lifecycle, or a crate's lints, tests and mutation gate. Also use for a review of existing Rust, or when a borrow-checker or trait-bound error wants a design fix rather than a `.clone()`."
+description: "Design Rust so the compiler enforces the design and hands you the worklist. Load on the first sign the work is Rust, before the first edit: a `Cargo.toml` or `Cargo.lock` in the tree, a `*.rs` file in the diff or about to be written, a `cargo` command, a Rust crate or workspace member by name. Use when writing or refactoring Rust — a crate or module, a type, trait, enum or public API, error handling, tokio tasks and channels, FFI over a C library, state persisted to a file, a background thread's lifecycle, or a crate's lints, tests and mutation gate. Also use for a review of existing Rust, or when a borrow-checker or trait-bound error wants a design fix rather than a `.clone()`."
 ---
 
 # Rust
@@ -11,9 +11,9 @@ Rust pays for its difficulty in one currency: a design mistake becomes a compile
 
 ## The loop
 
-1. **Signatures first.** Types, signatures, `todo!()` bodies, bare `cargo check` — not the gate, since `todo!()` bodies emit unused-variable noise by design; grep for `^error`. Where a framework trait or a `serde` attribute is the design, it goes in the skeleton — a handler with a `todo!()` body typechecks only if its return type already implements the response trait. A `-> impl Trait` body needs a concrete stub (`std::iter::empty()`), not `todo!()`, which satisfies no bound. A plain library with neither can skip the pass.
+1. **Signatures first.** Types, signatures, `todo!()` bodies, a bare `cargo check` whose errors count and whose warnings do not. Where a framework trait or a `serde` attribute is the design, it goes in the skeleton. A plain library with neither can skip the pass.
 2. **Fill one body at a time**, `cargo check` between.
-3. **Green.** The gate in `references/verify.md`, `-D warnings`, everything `--workspace`. Clippy's suggestion is usually right; when you keep the code anyway, `#[expect(lint, reason = "…")]` on the narrowest scope, except in code a macro emits — `expect` warns once the lint stops firing, so a stale suppression reports itself.
+3. **Green.** The gate in `references/verify.md`.
 4. **Break it on purpose.** Green proves the tests ran, not that they discriminate. Before claiming done, delete the code behind each claim you would make about the design and watch a named test fail. `references/verify.md` has the method and the table it produces.
 5. **Leave it cleaner.** `clean-code`'s second pass, in a fresh context, over the diff and one hop out. Rust's worklist is clippy under `verify.md`'s `clippy.toml`: every size or shape hit inside the scope is fixed or ledgered as an issue, in a commit that carries no behaviour change.
 
@@ -22,12 +22,12 @@ Rust pays for its difficulty in one currency: a design mistake becomes a compile
 These moves turn "find everywhere that…" into a list rustc hands you — complete, unlike grep:
 
 - **Change the type, then `cargo check`.** Every affected call site is now an error. That list is the refactor plan.
-- **Match your own enums exhaustively, with no `_ =>` arm**, wherever the variant set is small enough that every arm is a real decision. Adding a variant then becomes an error at exactly the sites that must handle it. The shape that slips past review is `match self { Self::X(v) => Some(v), _ => None }` — write the other arms out. When a wide match shares an implementation, push the per-variant part into a closure (`BinOp::Add => arith(a, b, |x, y| x + y)`) rather than collapsing it. A match over a *tuple* of enums is the exception; `references/verify.md` says when a catch-all is allowed there.
+- **Match your own enums exhaustively**, enforced on single enums by `verify.md`'s `wildcard_enum_match_arm`: adding a variant then becomes an error at exactly the sites that must handle it.
 - **Add the field or variant before the logic**, to get that list earlier.
 
 ## Core and shell
 
-`clean-code`'s decompose-by-decision rule has a Rust-specific force. Decisions are sync functions over values; async is contagious — every `async fn` forces its callers async — so a small async surface leaves most of the program testable with no runtime, no temp dir, and no mock. When a test needs `#[tokio::test]` or a mock to reach a *decision*, that decision leaked into the shell; move it back. The reverse leak is quieter and survives that test: a decision function returning a label the caller must interpret leaves the derivation in the shell, where no pure test reaches it. Hand back what the shell executes — `boundaries.md`, *what a decision hands back*.
+`clean-code`'s decompose-by-decision rule has a Rust-specific force. Decisions are sync functions over values; a small async surface leaves most of the program testable with no runtime, no temp dir, and no mock. When a test needs `#[tokio::test]` or a mock to reach a *decision*, that decision leaked into the shell; move it back. The reverse leak is quieter and survives that test: a decision function returning a label the caller must interpret leaves the derivation in the shell, where no pure test reaches it. Hand back what the shell executes — `boundaries.md`, *what a decision hands back*.
 
 ## Where to spend
 
@@ -70,7 +70,7 @@ Read the file before writing the code, not after the review. A small change insi
 | writing a value whose methods must be called in an order | as above |
 | running a background `std::thread` that must be signalled and joined on drop | as above |
 | designing a trait, a public API, an iterator, or a crate layout; deciding where a module or file goes | `references/boundaries.md` — earn the trait, std traits first, signatures, crate split, a topic's directory |
-| writing a decision function whose return the shell must *interpret* — a `ServeMissed` that leaves the shell deriving *which* | `references/boundaries.md` § What a decision hands back |
+| writing a decision function whose return the shell must *interpret* — a variant that leaves the shell deriving *which* items to act on | `references/boundaries.md` § What a decision hands back |
 | building an interpreter, VM, query executor, or a pipeline over a fixed set of node kinds | `references/boundaries.md` § When you do write one |
 | choosing error types, propagation, or whether to panic | `references/errors.md` — variants as decisions, classifiers, panic policy, reporting once |
 | writing tokio — tasks, channels, shutdown, `select!`, a service that starts and drains | `references/async.md` — actors, channels, cancellation, shutdown, blocking, clocks |
