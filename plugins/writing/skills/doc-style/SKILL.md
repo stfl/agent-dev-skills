@@ -210,6 +210,10 @@ settled fact to every later change.
   branch lands, search the lines it adds for such keys, words and names,
   case-insensitive, and compare the hits with the main line. Why: the
   repository outlives the tracker and the team.
+- **A fixed sentence has twins.** When a fix changes a sentence of a document
+  or a comment, grep the tree for the same sentence and fix every twin in the
+  same change. Why: a twin left behind keeps the defect the fix removed, and
+  the next review finds it as a new one.
 
 # Reviewing rather than restructuring
 
