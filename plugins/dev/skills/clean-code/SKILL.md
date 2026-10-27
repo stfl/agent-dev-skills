@@ -31,6 +31,8 @@ A design that brings a system to a desired state compares it with the actual sta
 
 A test covers each wrong form of the property it names. That one failing item takes nothing from the items around it can fail two ways, stopping at the failure or discarding what came before it, so its test puts the failing item between two that succeed and asserts the results of both; a failure at either end of the sequence shows one wrong form only. A test of a rule over several kinds of input gives one input of each kind. Before you rely on such a test, run it once against each wrong form and watch it fail. Why: a test that sees one wrong form passes code that is wrong in the other.
 
+Code or a test that models what a tool does with an input — its output, its error text, its formatting, the place it reports — takes the expected value, the parser or the stand-in from the tool itself: run it on a real input of each kind the model covers and read what it prints, never write it from memory or from the tool's documentation. Why: a model written from expectation holds what its author believes, and the tool's output decides otherwise for the inputs that matter.
+
 ## The second pass
 
 Runs after the behaviour change is green, in a fresh context — a reviewer or a new agent — because the writer stops at green and inherits every "good enough" it told itself. Scope is the diff plus one hop: the callers and callees of every changed function, and every type that gained a field or variant. Nothing outside the scope moves.
