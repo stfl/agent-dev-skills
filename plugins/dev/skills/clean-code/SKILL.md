@@ -33,6 +33,8 @@ A test covers each wrong form of the property it names. That one failing item ta
 
 Code or a test that models what a tool does with an input — its output, its error text, its formatting, the place it reports — takes the expected value, the parser or the stand-in from the tool itself: run it on a real input of each kind the model covers and read what it prints, never write it from memory or from the tool's documentation. Why: a model written from expectation holds what its author believes, and the tool's output decides otherwise for the inputs that matter.
 
+A test that a guard stops a costly input within a time bound sets the bound from the ratio of work between what the guard does before it stops and what the input costs without it: the bound tells a stop from an unguarded run on every machine where the stop takes less than the bound and more than the bound divided by that ratio. Set it at no less than five times the slowest CI run known then; afterwards a CI run is a finding only past half the bound, and only then is the bound set again. A measured time goes in the commit message or the pull request, with the run or host it came from, never in the docs or a comment. Why: a measured time is a sample of one machine, so the next slow runner makes a bound or a doc set from it false while the code stays the same.
+
 ## The second pass
 
 Runs after the behaviour change is green, in a fresh context — a reviewer or a new agent — because the writer stops at green and inherits every "good enough" it told itself. Scope is the diff plus one hop: the callers and callees of every changed function, and every type that gained a field or variant. Nothing outside the scope moves.
