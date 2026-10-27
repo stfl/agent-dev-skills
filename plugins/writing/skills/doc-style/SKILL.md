@@ -202,6 +202,14 @@ settled fact to every later change.
   item and build before you write that the compiler requires it.
 - **A claim about an external system** states no more than its newest
   measurement shows.
+- **A reference resolves from the repository.** A line holds no key of a
+  tracker its reader may not open, no requirement id or term that only
+  another repository defines, no word of the team's delivery process, and no
+  person named as the owner of a decision: state the decision as the
+  system's own, and link the spec or ADR that holds its reasoning. Before a
+  branch lands, search the lines it adds for such keys, words and names,
+  case-insensitive, and compare the hits with the main line. Why: the
+  repository outlives the tracker and the team.
 
 # Reviewing rather than restructuring
 
