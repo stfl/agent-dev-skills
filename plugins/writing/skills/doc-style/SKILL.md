@@ -197,17 +197,13 @@ settled fact to every later change.
 - **An absolute word is a claim to falsify.** Grep the codebase for what each
   *every*, *only*, *never*, *none* or *the one place* denies, members and log
   calls at every level included, and narrow the word where the code
-  disagrees.
-- **A claim over places is one claim per place.** A line that says *every X*,
-  *at every depth* or *differs only in Y*, that lists examples after *such
-  as*, or a changelog entry that lists changed outcomes, claims each place or
-  example it covers. List the places the code reads, probe those it does not,
-  and hold each with a test of its own, or narrow the line to the ones that
-  have one. Check a list of changed outcomes against every outcome the code
-  tells apart: an input that moves from rejected to accepted, one that moves
-  from accepted to rejected, and one that keeps its result under another
-  option. Why: a reader trusts the whole claim, and a test of one item leaves
-  the others unchecked.
+  disagrees. Each place such a word covers is a claim of its own, and so is
+  each example after *such as* and each changed outcome a changelog lists:
+  hold each with a test of its own, or narrow the line to those that have
+  one. Check changed outcomes against every outcome the code tells apart: an
+  input that moves from rejected to accepted, one that moves the other way,
+  and one that keeps its result under another option. Why: a test of one
+  place leaves the others unchecked.
 - **A reason is a claim too.** Measure it before you write it: narrow the
   item and build before you write that the compiler requires it.
 - **A claim about an external system** states no more than its newest
