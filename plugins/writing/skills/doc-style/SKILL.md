@@ -1,6 +1,6 @@
 ---
 name: doc-style
-description: Keep a repo's documentation lean and routed to its reader — the README a human primer, docs/ the human reference, CLAUDE.md/AGENTS.md the agent notes, and comments in code only what the code cannot say. Use when writing, rewriting, reviewing, trimming or splitting a README; when a README has grown into a reference manual or "is a lot of prose nobody reads"; when asked to make docs human-facing, to write one as a developer advocate or for clients, to set up a docs/ layout, or to decide which file a fact belongs in. Also use when code carries more comments than code, when asked to slim, trim, clean up or review doc comments, rustdoc, docstrings or inline comments, when comments drift out of sync with the code (counts, copied values, history), or before answering a review question by adding a sentence to a comment. Also use before adding a section to an existing README.
+description: Keep a repo's documentation lean and routed to its reader — the README a human primer, docs/ the human reference, CLAUDE.md/AGENTS.md the agent notes, and comments in code only what the code cannot say. Use when writing, rewriting, reviewing, trimming or splitting a README; when a README has grown into a reference manual or "is a lot of prose nobody reads"; when asked to make docs human-facing, to write one as a developer advocate or for clients, to set up a docs/ layout, or to decide which file a fact belongs in. Also use when code carries more comments than code, when asked to slim, trim, clean up or review doc comments, rustdoc, docstrings or inline comments, when comments drift out of sync with the code (counts, copied values, history), or before answering a review question by adding a sentence to a comment. Also use before adding a section to an existing README, and before a branch that adds documentation lines or comments lands.
 ---
 
 # Doc style
@@ -185,6 +185,23 @@ and after totals.
 Comments regrow too. Put the rule in the repo's own agent notes, in a few
 lines a contributor without these global rules can follow: what a comment
 holds, the no-counts and no-copied-values rule, and where reasoning goes.
+
+# Claims a line makes
+
+A line of a document or a comment that states a rule or a claim about the
+code is checked against the code before it lands, and before anyone is asked
+to approve it: every line the branch adds, not only those of its last change.
+Why: a rule that is false of the code in the commit that writes it reads as
+settled fact to every later change.
+
+- **An absolute word is a claim to falsify.** Grep the codebase for what each
+  *every*, *only*, *never*, *none* or *the one place* denies, members and log
+  calls at every level included, and narrow the word where the code
+  disagrees.
+- **A reason is a claim too.** Measure it before you write it: narrow the
+  item and build before you write that the compiler requires it.
+- **A claim about an external system** states no more than its newest
+  measurement shows.
 
 # Reviewing rather than restructuring
 
